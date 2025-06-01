@@ -1,0 +1,81 @@
+.product-card {
+  /* Layout */
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  /* Structure */
+  border: 1px solid #010713;
+  background: #fff;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  
+
+  /* Typography */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: #111827;
+}
+
+.product-card h3 {
+  /* ID styling - minimal */
+  margin: 0 0 0.5rem 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+}
+
+.product-card p {
+  /* Title styling - clear hierarchy */
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.product-card span {
+  /* Price styling - prominent but not flashy */
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* No hover effects, animations, or decorative elements */
+/* No pseudo-elements for performance */
+/* No CSS variables for better browser compatibility */
+
+/* Responsive fallback */
+@media (max-width: 640px) {
+  .product-card {
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+}
+.main-div{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+.number-container{
+    border: 2px solid #010713;
+    padding: 5px;
+    margin: 3px;
+
+}
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ /* border: 2px solid red; */
+
+}
+.number-container:active{
+    background-color: red;
+}
+.active{
+    background-color: greenyellow;
+}
