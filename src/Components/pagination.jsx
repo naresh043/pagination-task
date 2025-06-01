@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./pagination.css"; // Assuming you have a CSS file for styling
+import "./pagination.css";
 import ProductCard from "./product-card/ProductCard";
 
-const PAGE_SIZE = 10; // Number of items per page
+const PAGE_SIZE = 10; 
 function PaginationTask() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -44,7 +44,7 @@ function PaginationTask() {
             <button
               key={id}
               className={"number-container" + (currentPage === p ? " active" : "")}
-            //   disabled={currentPage === p}
+            
               onClick={() => handlePageChange(p)}
             >
               {p}
