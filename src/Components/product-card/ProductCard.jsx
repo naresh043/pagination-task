@@ -1,10 +1,10 @@
 function ProductCard({ id, title, body }) {
   return (
-    <div className="product-card">
-      <h3>{id}</h3>
-      <p>{title}</p>
-      <span>${body}</span>
-    </div>
+    <tr key={id}>
+      <td>{id}</td>
+      <td>{title}</td>
+      <td>{body}</td>
+    </tr>
   );
 }
 export default ProductCard;

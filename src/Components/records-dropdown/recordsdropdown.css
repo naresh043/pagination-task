@@ -1,0 +1,79 @@
+/* Dropdown Container */
+.select {
+  /* Basic Styles */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px 32px 8px 12px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #495057;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  cursor: pointer;
+  
+  /* Layout */
+  min-width: 80px;
+  height: 38px;
+  
+  /* Typography */
+  font-weight: 500;
+  line-height: 1.5;
+  
+  /* Transition */
+  transition: 
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+/* Focus State */
+.select:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Dropdown Arrow */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  font-size: 10px;
+  color: #6c757d;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Hover State */
+.select:hover {
+  border-color: #adb5bd;
+}
+
+/* Disabled State */
+.select:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+.select-label{
+    padding: 10px;
+}
+
+/* Dark Mode Support (optional) */
+@media (prefers-color-scheme: dark) {
+  .select {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-color: #495057;
+  }
+  
+  .select-wrapper::after {
+    color: #adb5bd;
+  }
+}

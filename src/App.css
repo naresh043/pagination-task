@@ -40,3 +40,39 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Improved Dark Mode Styling */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+/* Ensure all elements follow dark theme */
+body.dark-mode * {
+  background-color: transparent;
+  color: inherit;
+}
+
+.darkmode-active {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+/* Buttons in dark mode */
+.darkmode-active button {
+  background-color: #2c2c2c;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+.darkmode-active .active {
+  background-color: #3d9970; /* A pleasant green */
+  font-weight: bold;
+}
+
+.theme-container span{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}

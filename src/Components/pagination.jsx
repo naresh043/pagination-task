@@ -2,15 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./pagination.css";
 import ProductCard from "./product-card/ProductCard";
-
-const PAGE_SIZE = 10; 
-function PaginationTask() {
+import { API_URL } from "./constValues";
+import PaginationLabel from "./pagination-label/pagination-label";
+import RecordsDropdown from "./records-dropdown/recordsdropdown";
+function PaginationTask({ noRecords, setNoRecords, children }) {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const fetchData = async () => {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+    const response = await axios.get(API_URL);
     const json = await response.data;
     setData(json);
     console.log(json);
@@ -24,50 +23,68 @@ function PaginationTask() {
     console.log("Current Page:", p);
   };
   const handlePreviousPage = () => {
-    setCurrentPage((prevPage) =>prevPage > 0 ? prevPage - 1 : 0);
-  }
-  const handleNextPage=()=>{
-    setCurrentPage((prevPage) =>prevPage < Math.ceil(data.length / PAGE_SIZE) - 1 ? prevPage + 1 : prevPage);
-  }
+    setCurrentPage((prevPage) => (prevPage > 0 ? prevPage - 1 : 0));
+  };
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) =>
+      prevPage < Math.ceil(data.length / noRecords) - 1
+        ? prevPage + 1
+        : prevPage
+    );
+  };
   const totalProducts = data.length;
-  const totalPages = Math.ceil(data.length / PAGE_SIZE);
-  console.log("Total Products:", totalPages,currentPage);
-  const start = currentPage * PAGE_SIZE;
-  const end = start + PAGE_SIZE;
+  const totalPages = Math.ceil(data.length / noRecords);
+  console.log("Total Products:", totalPages, currentPage);
+  const start = currentPage * noRecords;
+  const end = start + noRecords;
+
+  const previousPage = currentPage > 0 ? currentPage - 1 : null;
+  const nextPage = currentPage < totalPages - 1 ? currentPage + 1 : null;
   return (
     <>
-      <h1>Pagination</h1>
-      <div className="pagination-container">
-        <button disabled={currentPage===0} onClick={handlePreviousPage}>previous</button>
-        {[...Array(totalPages).keys()].map((p, id) => (
-          <>
-            <button
-              key={id}
-              className={"number-container" + (currentPage === p ? " active" : "")}
-            
-              onClick={() => handlePageChange(p)}
-            >
-              {p}
-            </button>
-          </>
-        ))}
-        <button disabled={currentPage===totalPages-1} onClick={handleNextPage}>Next page</button>
+      <div className="pagination-header">
+        <RecordsDropdown setNoRecords={setNoRecords} />
+        <PaginationLabel
+          totalPages={totalPages}
+          previousPage={previousPage}
+          currentPage={currentPage}
+          nextPage={nextPage}
+          handlePageChange={handlePageChange}
+          handlePreviousPage={handlePreviousPage}
+          handleNextPage={handleNextPage}
+        />
+        <div className="theme-container">{children}</div>
       </div>
-      <div className="main-div">
-        {data.length > 0 ? (
-          data.slice(start, end).map((item) => {
-            return (
-              <ProductCard
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                body={item.body}
-              />
-            );
-          })
-        ) : (
-          <h1>data not Fround</h1>
-        )}
+      <div className="table-container">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Body</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.length > 0 ? (
+              data.slice(start, end).map((item) => {
+                return (
+                  <ProductCard
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    body={item.body}
+                  />
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan="3" className="no-data-message">
+                  No data found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );
