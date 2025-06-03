@@ -7,7 +7,10 @@ import PaginationLabel from "./pagination-label/pagination-label";
 import RecordsDropdown from "./records-dropdown/recordsdropdown";
 function PaginationTask({ noRecords, setNoRecords, children }) {
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(
+    () => parseInt(localStorage.getItem("currentPage")) || 0
+  );
+
   const fetchData = async () => {
     const response = await axios.get(API_URL);
     const json = await response.data;
@@ -17,6 +20,10 @@ function PaginationTask({ noRecords, setNoRecords, children }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+    useEffect(() => {
+    localStorage.setItem("currentPage", currentPage);
+  }, [currentPage]);
 
   const handlePageChange = (p) => {
     setCurrentPage(p);
